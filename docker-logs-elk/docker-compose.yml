@@ -20,18 +20,13 @@ services:
     links:
        - logstash
   kibana:
-    build:
-      context: kibana/
-      args:
-        ELK_VERSION: $ELK_VERSION
+    image: kibana:7.2.1
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
     links:
       - elasticsearch
     ports:
-      - "5601:5601"
-    depends_on:
-      - elasticsearch
+      - 5601:5601
   logstash: 
     hostname: logstash 
     image: docker-logs-elk/logstash:1.0.0
